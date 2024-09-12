@@ -17,7 +17,7 @@
 		<result property="regDate" 				column="reg_date" 					jdbcType="DATE" />
 	</resultMap>
 	
-	<!-- SQL : INSERT -->
+	
 	<insert 	id="addProduct"		parameterType="product" >
 	 	INSERT
 		INTO product( prod_no, prod_Name, prod_detail, manufacture_day, price, image_file, reg_date) 
@@ -25,7 +25,6 @@
 							#{fileName:VARCHAR} , SYSDATE )
 	 </insert>
 	 
-	 <!-- SQL : SELECT ONE -->
 	 <select 	id="getProduct"	parameterType="int"	resultMap="productSelectMap">
 		SELECT
 		prod_no , image_file , manufacture_day , price ,  prod_detail ,  prod_name , reg_date		
@@ -33,67 +32,61 @@
 		WHERE prod_no = #{value}
 	 </select>
 	 
-	 <select 	id="checkProduct"	resultMap="int">
-		SELECT
-		seq_product_prod_no.CURRVAL 		
-		FROM DUAL
-	 </select>
 	 
-	 <!-- SQL : UPDATE -->
-	 <update	id="updateUser"	parameterType="user" >
-	   	UPDATE users
+	 
+	 <update	id="updateProduct"	parameterType="product" >
+	   	UPDATE product
 	   	<set>
-	   		user_name 	= #{userName} ,
-			cell_phone	= #{phone},
-			addr 				= #{addr} ,
-			email				=	#{email}
+	   		prod_no = #{prodNo} , 
+	   		prod_name 	= #{prodName} ,
+			prod_detail	= #{prodDetail},
+			manufacture_day 				= #{manuDate} ,
+			price				=	#{price} , 
+			image_file = #{fileName}
 	   	</set>
-	   	WHERE user_id = #{userId}
+	   	WHERE prod_no = #{prodNo}
 	 </update>
 		 
-	<!-- SQL : SELECT LIST -->
-	<select  id="getUserList"  parameterType="search"	resultMap="userSelectMap">
+	
+	<select  id="getProductList"  parameterType="search"	resultMap="productSelectMap">
 	  	SELECT *
 	  	FROM (	SELECT inner_table.* , ROWNUM AS row_seq
-	  					FROM		(	SELECT user_id , user_name , email
-											FROM users
+	  					FROM		(	SELECT prod_name , price , manufacture_day
+											FROM product
 											<if test="searchCondition != null">
 												<where>
 													<if test="searchCondition == 0 and searchKeyword !='' ">
-										 				user_id = #{searchKeyword}
+										 				prod_no = #{searchKeyword}
 													</if>
 													<if test="searchCondition == 1 and searchKeyword !='' ">
-										 				user_name = #{searchKeyword}
+										 				prod_name = #{searchKeyword}
+													</if>
+													<if test="searchCondition == 2 and searchKeyword !='' ">
+										 				price = #{searchKeyword}
 													</if>
 												</where>
 											</if>
-											ORDER BY user_id ) inner_table
+											ORDER BY prod_no ) inner_table
 						WHERE ROWNUM &lt;= #{endRowNum} )
 		WHERE row_seq BETWEEN #{startRowNum} AND #{endRowNum} 
 	 </select>
-	 	<!--  위 두번째 subQuery 의  
-	 			WHERE ROWNUM &lt;= #{endRowNum} ) 는
-	 			WHERE ROWNUM <= #{endRowNum} ) 의미이며..
-	 			< 는 keyword 로 &lt; 를	사용.
-	 			
-	 			<![CDATA[  ~~~  ]]> 를 이용하여 아래와 같이 사용  할 수 있다.
-	 			CDATA ==> Character Data 의 의미 Java 에서 \n 같은 특수문자 처리  
-
-				WHERE ROWNUM <![CDATA[ <=]]> #{endRowNum} )
-		-->
+	 	
 	
-	<!-- SQL : SELECT ROW Count -->	 
+	
 	 <select  id="getTotalCount"  parameterType="search"	 resultType="int">
 	  	SELECT COUNT(*)
-	  	FROM(	SELECT user_id , user_name , email
-						FROM users
+	  	FROM(	SELECT prod_name , price , manufacture_day
+						FROM product
 						<if test="searchCondition != null">
 							<where>
 								<if test="searchCondition == 0 and searchKeyword !='' ">
-						 			user_id = #{searchKeyword}
+									prod_no = #{searchKeyword}
 								</if>
 								<if test="searchCondition == 1 and searchKeyword !='' ">
-						 		user_name = #{searchKeyword}
+									prod_name = #{searchKeyword}
+								</if>
+								<if test="searchCondition == 2 and searchKeyword !='' ">
+									price = #{searchKeyword}
 								</if>
 							</where>
 						</if> ) countTable						

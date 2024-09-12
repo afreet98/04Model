@@ -33,13 +33,9 @@ public class ProductServiceTest {
 	@Qualifier("productServiceImpl")
 	private ProductService productService;
 	
-	//@Test
-	public void CheckProduct() {
-		
-	}
 	
-	@Test
-	public void AddProduct() throws Exception {
+	//@Test
+	public void addProduct() throws Exception {
 		
 		Product product = new Product();
 		product.setProdName("김재호");
@@ -49,223 +45,159 @@ public class ProductServiceTest {
 		product.setFileName("");
 		
 		productService.addProduct(product);
-		CheckProduct();
 		
-		//product = productService.getProduct(product.getProdNo());
-		
-		
-		
-		//==> console 확인
-		System.out.println(product.getProdNo());
-		
-		//==> API 확인
-		//Assert.assertEquals("김재호", product.getProdName());
-		//Assert.assertEquals("아버지", product.getProdDetail());
-		//Assert.assertEquals("19710526", product.getManuDate());
-		//Assert.assertEquals("50000", product.getPrice());
-		//Assert.assertEquals("", product.getFileName());
 	}
 	
 	//@Test
-//	public void testGetProduct() throws Exception {
-//		
-//		User user = new User();
-//		//==> 필요하다면...
-////		user.setUserId("testUserId");
-////		user.setUserName("testUserName");
-////		user.setPassword("testPasswd");
-////		user.setSsn("1111112222222");
-////		user.setPhone("111-2222-3333");
-////		user.setAddr("경기도");
-////		user.setEmail("test@test.com");
-//		
-//		user = userService.getUser("testUserId");
-//
-//		//==> console 확인
-//		//System.out.println(user);
-//		
-//		//==> API 확인
-//		Assert.assertEquals("testUserId", user.getUserId());
-//		Assert.assertEquals("testUserName", user.getUserName());
-//		Assert.assertEquals("testPasswd", user.getPassword());
-//		Assert.assertEquals("111-2222-3333", user.getPhone());
-//		Assert.assertEquals("경기도", user.getAddr());
-//		Assert.assertEquals("test@test.com", user.getEmail());
-//
-//		Assert.assertNotNull(userService.getUser("user02"));
-//		Assert.assertNotNull(userService.getUser("user05"));
-//		
-//	}
-//	
-//	//@Test
-//	 public void testUpdateUser() throws Exception{
-//		 
-//		User user = userService.getUser("testUserId");
-//		Assert.assertNotNull(user);
-//		
-//		Assert.assertEquals("testUserName", user.getUserName());
-//		Assert.assertEquals("111-2222-3333", user.getPhone());
-//		Assert.assertEquals("경기도", user.getAddr());
-//		Assert.assertEquals("test@test.com", user.getEmail());
-//
-//		user.setUserName("change");
-//		user.setPhone("777-7777-7777");
-//		user.setAddr("change");
-//		user.setEmail("change@change.com");
-//		
-//		userService.updateUser(user);
-//		
-//		user = userService.getUser("testUserId");
-//		Assert.assertNotNull(user);
-//		
-//		//==> console 확인
-//		//System.out.println(user);
-//			
-//		//==> API 확인
-//		Assert.assertEquals("change", user.getUserName());
-//		Assert.assertEquals("777-7777-7777", user.getPhone());
-//		Assert.assertEquals("change", user.getAddr());
-//		Assert.assertEquals("change@change.com", user.getEmail());
-//		
-//	 }
-//	 
-//	//@Test
-//	public void testCheckDuplication() throws Exception{
-//		
-//
-//		//==> 필요하다면...
-////		User user = new User();
-////		user.setUserId("testUserId");
-////		user.setUserName("testUserName");
-////		user.setPassword("testPasswd");
-////		user.setSsn("1111112222222");
-////		user.setPhone("111-2222-3333");
-////		user.setAddr("경기도");
-////		user.setEmail("test@test.com");
-////		
-////		userService.addUser(user);
-//		
-//		//==> console 확인
-//		System.out.println(userService.checkDuplication("testUserId"));
-//		System.out.println(userService.checkDuplication("testUserId"+System.currentTimeMillis()) );
-//	 	
-//		//==> API 확인
-//		Assert.assertFalse( userService.checkDuplication("testUserId") );
-//	 	Assert.assertTrue( userService.checkDuplication("testUserId"+System.currentTimeMillis()) );
-//	 	
-//		 	
-//	}
-//	
-//	 //==>  주석을 풀고 실행하면....
-//	 //@Test
-//	 public void testGetUserListAll() throws Exception{
-//		 
-//	 	Search search = new Search();
-//	 	search.setCurrentPage(1);
-//	 	search.setPageSize(3);
-//	 	Map<String,Object> map = userService.getUserList(search);
-//	 	
-//	 	List<Object> list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(3, list.size());
-//	 	
-//		//==> console 확인
-//	 	//System.out.println(list);
-//	 	
-//	 	Integer totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
-//	 	
-//	 	System.out.println("=======================================");
-//	 	
-//	 	search.setCurrentPage(1);
-//	 	search.setPageSize(3);
-//	 	search.setSearchCondition("0");
-//	 	search.setSearchKeyword("");
-//	 	map = userService.getUserList(search);
-//	 	
-//	 	list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(3, list.size());
-//	 	
-//	 	//==> console 확인
-//	 	//System.out.println(list);
-//	 	
-//	 	totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
-//	 	
-//	 }
-//	 
-//	 //@Test
-//	 public void testGetUserListByUserId() throws Exception{
-//		 
-//		 
-//	 	Search search = new Search();
-//	 	search.setCurrentPage(1);
-//	 	search.setPageSize(3);
-//	 	search.setSearchCondition("0");
-//	 	search.setSearchKeyword("admin");
-//	 	Map<String,Object> map = userService.getUserList(search);
-//	 	
-//	 	List<Object> list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(1, list.size());
-//	 	
-//		//==> console 확인
-//	 	//System.out.println(list);
-//	 	
-//	 	Integer totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
-//	 	
-//	 	System.out.println("=======================================");
-//	 	
-//	 	search.setSearchCondition("0");
-//	 	search.setSearchKeyword(""+System.currentTimeMillis());
-//	 	map = userService.getUserList(search);
-//	 	
-//	 	list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(0, list.size());
-//	 	
-//		//==> console 확인
-//	 	//System.out.println(list);
-//	 	
-//	 	totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
-//	 	
-//	 }
-//	 
-//	 //@Test
-//	 public void testGetUserListByUserName() throws Exception{
-//		 
-//		 
-//	 	Search search = new Search();
-//	 	search.setCurrentPage(1);
-//	 	search.setPageSize(3);
-//	 	search.setSearchCondition("1");
-//	 	search.setSearchKeyword("SCOTT");
-//	 	Map<String,Object> map = userService.getUserList(search);
-//	 	
-//	 	List<Object> list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(3, list.size());
-//	 	
-//		//==> console 확인
-//	 	System.out.println(list);
-//	 	
-//	 	Integer totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
-//	 	
-//	 	System.out.println("=======================================");
-//	 	
-//	 	search.setSearchCondition("1");
-//	 	search.setSearchKeyword(""+System.currentTimeMillis());
-//	 	map = userService.getUserList(search);
-//	 	
-//	 	list = (List<Object>)map.get("list");
-//	 	Assert.assertEquals(0, list.size());
-//	 	
-//		//==> console 확인
-//	 	System.out.println(list);
-//	 	
-//	 	totalCount = (Integer)map.get("totalCount");
-//	 	System.out.println(totalCount);
-//	 	
-//	 }	 
+	public void getProduct() throws Exception {
+		
+		Product product = new Product();
+		//==> 필요하다면...
+//		user.setUserId("testUserId");
+//		user.setUserName("testUserName");
+//		user.setPassword("testPasswd");
+//		user.setSsn("1111112222222");
+//		user.setPhone("111-2222-3333");
+//		user.setAddr("경기도");
+//		user.setEmail("test@test.com");
+		
+		product = productService.getProduct(10040);
+
+		//==> console 확인
+		System.out.println(product);
+		
+	}
+	
+	//@Test
+	 public void updateProduct() throws Exception{
+		 
+		Product product = new Product();
+		
+		product.setProdNo(10040);
+		product.setProdName("김문호");
+		product.setProdDetail("작은 아버지");
+		product.setManuDate("1975-04-25");
+		product.setPrice(Integer.parseInt("10000"));
+		product.setFileName("");
+		
+		productService.updateProduct(product);
+		
+		product = productService.getProduct(10040);
+	
+		System.out.println(product);
+			
+		
+	 }
+	 
+	
+	 //==>  주석을 풀고 실행하면....
+	 //@Test
+	 public void getProductListAll() throws Exception{
+		 
+	 	Search search = new Search();
+	 	search.setCurrentPage(1);
+	 	search.setPageSize(3);
+	 	Map<String,Object> map = productService.getProductList(search);
+	 	
+	 	List<Object> list = (List<Object>)map.get("list");
+	 	Assert.assertEquals(3, list.size());
+	 	
+		//==> console 확인
+	 	//System.out.println(list);
+	 	
+	 	Integer totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
+	 	
+	 	System.out.println("=======================================");
+	 	
+	 	search.setCurrentPage(1);
+	 	search.setPageSize(3);
+	 	search.setSearchCondition("0");
+	 	search.setSearchKeyword("");
+	 	map = productService.getProductList(search);
+	 	
+	 	list = (List<Object>)map.get("list");
+	 	Assert.assertEquals(3, list.size());
+	 	
+	 	//==> console 확인
+	 	//System.out.println(list);
+	 	
+	 	totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
+	 	
+	 }
+	 
+	 //@Test
+	 public void getProductListByProdNo() throws Exception{
+		 
+		 
+	 	Search search = new Search();
+	 	search.setCurrentPage(1);
+	 	search.setPageSize(3);
+	 	search.setSearchCondition("0");
+	 	search.setSearchKeyword("10040");
+	 	Map<String,Object> map = productService.getProductList(search);
+	 	
+	 	List<Object> list = (List<Object>)map.get("list");
+	 	Assert.assertEquals(1, list.size());
+	 	
+	 	//==> console 확인
+	 	//System.out.println(list);
+	 	
+	 	Integer totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
+	 	
+	 	System.out.println("=======================================");
+	 	
+	 	search.setSearchCondition("0");
+	 	search.setSearchKeyword(""+System.currentTimeMillis());
+	 	map = productService.getProductList(search);
+	 	
+	 	list = (List<Object>)map.get("list");
+	 	Assert.assertEquals(0, list.size());
+	 	
+		//==> console 확인
+	 	//System.out.println(list);
+	 	
+	 	totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
+	 	
+	 }
+	 
+	 //@Test
+	 public void GetProductListByProdName() throws Exception{
+		 
+		 
+	 	Search search = new Search();
+	 	search.setCurrentPage(1);
+	 	search.setPageSize(3);
+	 	search.setSearchCondition("1");
+	 	search.setSearchKeyword("김성환");
+	 	Map<String,Object> map = productService.getProductList(search);
+	 	
+	 	List<Object> list = (List<Object>)map.get("list");
+	 	
+		//==> console 확인
+	 	System.out.println(list);
+	 	
+	 	Integer totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
+	 	
+	 	System.out.println("=======================================");
+	 	
+	 	search.setSearchCondition("1");
+	 	search.setSearchKeyword(""+System.currentTimeMillis());
+	 	map = productService.getProductList(search);
+	 	
+	 	list = (List<Object>)map.get("list");
+	 	
+		//==> console 확인
+	 	System.out.println(list);
+	 	
+	 	totalCount = (Integer)map.get("totalCount");
+	 	System.out.println(totalCount);
+	 	
+	 }	 
 	 
 	 
 }

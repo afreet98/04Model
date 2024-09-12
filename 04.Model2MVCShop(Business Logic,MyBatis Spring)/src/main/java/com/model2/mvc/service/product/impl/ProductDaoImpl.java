@@ -31,7 +31,7 @@ public class ProductDaoImpl implements ProductDao{
 
 	///Method
 	public void addProduct(Product product) throws Exception {
-		sqlSession.insert("ProductMapper.addProdct", product);
+		sqlSession.insert("ProductMapper.addProduct", product);
 	}
 
 	public Product getProduct(int ProdNo) throws Exception {
@@ -39,15 +39,15 @@ public class ProductDaoImpl implements ProductDao{
 	}
 	
 	public void updateProduct(Product product) throws Exception {
-		//sqlSession.update("UserMapper.updateUser", user);
+		sqlSession.update("ProductMapper.updateProduct", product);
 	}
 
 	public List<Product> getProductList(Search search) throws Exception {
-		return sqlSession.selectList("UserMapper.getUserList", search);
+		return sqlSession.selectList("ProductMapper.getProductList", search);
 	}
 
 	// 게시판 Page 처리를 위한 전체 Row(totalCount)  return
 	public int getTotalCount(Search search) throws Exception {
-		return sqlSession.selectOne("UserMapper.getTotalCount", search);
+		return sqlSession.selectOne("ProductMapper.getTotalCount", search);
 	}
 }

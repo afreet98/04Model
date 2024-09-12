@@ -19,6 +19,6 @@ public interface ProductService {
 	public Product getProduct(int ProdNo) throws Exception;
 	
 	
-	//public boolean checkDuplication(String userId) throws Exception;
+
 	
 }

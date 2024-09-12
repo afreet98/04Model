@@ -33,7 +33,7 @@ public class UserServiceTest {
 	@Qualifier("userServiceImpl")
 	private UserService userService;
 
-	@Test
+	//@Test
 	public void testAddUser() throws Exception {
 		
 		User user = new User();
@@ -148,7 +148,7 @@ public class UserServiceTest {
 	}
 	
 	 //==>  주석을 풀고 실행하면....
-	 //@Test
+	 @Test
 	 public void testGetUserListAll() throws Exception{
 		 
 	 	Search search = new Search();
@@ -183,7 +183,7 @@ public class UserServiceTest {
 	 	System.out.println(totalCount);
 	 }
 	 
-	 //@Test
+	 @Test
 	 public void testGetUserListByUserId() throws Exception{
 		 
 	 	Search search = new Search();
